@@ -28,21 +28,9 @@ const drawBodies = Helpers.drawBodies;
 const drawConstraint = Helpers.drawConstraint;
 
 let engine;
-let ground;
 
 let constraint1;
 let poly1;
-
-let constraint2;
-let poly2;
-
-let constraint3;
-let rect3;
-let ball3;
-
-let constraint4;
-let polyA4;
-let polyB4;
 
 let canvas;
 
@@ -59,8 +47,9 @@ function setup() {
     engine.world.gravity.y = 0;
 
     Matter.Runner.run(engine);
-    matterCapture();
-    //matterCaptureNoPos();
+    //matterCapturePP();
+    matterConsumptionPP();
+    //matterAquaPP();
 }
 
 function draw() {
@@ -71,8 +60,10 @@ function draw() {
     for (let i = 0; i < BodyArray.length; i++) {
         if (BodyArray[i].col === "r") {
             fill(colR.r, colR.g, colR.b, 180);
-        } else {
+        } else if (BodyArray[i].col === "b") {
             fill(colB.r, colB.g, colB.b, 180);
+        } else if (BodyArray[i].col === "g") {
+            fill(colMix.r, colMix.g, colMix.b, 180);
         }
 
         drawBody(BodyArray[i]);
@@ -87,7 +78,7 @@ function draw() {
 
 }
 
-function matterCapture() {
+function matterCapturePP() {
     for (let i = 0; i < fishData.length; i++) {
         let ballInstance;
         let x1 = round(fishData[i].longitude);
@@ -121,23 +112,66 @@ function matterCapture() {
     }
 }
 
-function matterCaptureNoPos() {
+function matterAquaPP() {
     for (let i = 0; i < fishData.length; i++) {
         let ballInstance;
-        let x1 = 500
-        let y1 = 300;
-        ballInstance = Bodies.circle(x1, y1, (fishData[i].durchMesserKreisCapt) / 7);
-        constraint = Constraint.create({
-            pointA: { x: x1, y: y1 },
-            bodyB: ballInstance,
-            pointB: { x: 0, y: 0 },
-            stiffness: 0.0001,
-            damping: 0.1
-        });
+        let x1 = round(fishData[i].longitude);
+        let y1 = round(fishData[i].latitude);
+        x1 = map(x1, -180, 180, 100, 1400);
+        y1 = map(y1, -90, 90, 900, 100);
+        ballInstance = Bodies.circle(x1, y1, (fishData[i].durchMesserKreisAqua) / 7);
+        ballInstance.entity = fishData[i].Entity;
+        ballInstance.col = "b";
+        if (fishData[i].durchMesserKreisCapt < 500) {
+            constraint = Constraint.create({
+                pointA: { x: x1, y: y1 },
+                bodyB: ballInstance,
+                pointB: { x: 0, y: 0 },
+                stiffness: 0.0001,
+                damping: 0.1
+            });
+        } else {
+            constraint = Constraint.create({
+                pointA: { x: x1, y: y1 },
+                bodyB: ballInstance,
+                pointB: { x: -900, y: 0 - 100 },
+                stiffness: 0.001,
+                damping: 0.1
+            });
+        }
         World.add(engine.world, [ballInstance, constraint]);
         drawConstraint(constraint);
         BodyArray.push(ballInstance);
-        // drawBody(ballInstance);
+        //drawBody(ballInstance);
+    }
+}
+
+function matterConsumptionPP() {
+    for (let i = 0; i < fishData.length; i++) {
+
+        if (fishData[i].fishConsumptionPP !== "#N/A") {
+            let ballInstance;
+            let x1 = round(fishData[i].longitude);
+            let y1 = round(fishData[i].latitude);
+            x1 = map(x1, -180, 180, 100, 1400);
+            y1 = map(y1, -90, 90, 900, 100);
+            ballInstance = Bodies.circle(x1, y1, Math.sqrt(fishData[i].fishConsumptionPP) * 2);
+            ballInstance.entity = fishData[i].Entity;
+            ballInstance.col = "g";
+            constraint = Constraint.create({
+                pointA: { x: x1, y: y1 },
+                bodyB: ballInstance,
+                pointB: { x: 0, y: 0 },
+                stiffness: 0.0001,
+                damping: 0.1
+            });
+            World.add(engine.world, [ballInstance, constraint]);
+            drawConstraint(constraint);
+            BodyArray.push(ballInstance);
+        } else {
+            console.log(fishData[i].Entity)
+        }
+
     }
 }
 
