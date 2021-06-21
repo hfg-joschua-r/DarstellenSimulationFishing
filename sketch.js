@@ -30,7 +30,6 @@ const drawConstraint = Helpers.drawConstraint;
 let engine;
 
 let constraint1;
-let poly1;
 
 let canvas;
 
@@ -158,23 +157,13 @@ function matterCaptureAbsolute() {
         ballInstance = Bodies.circle(x1, y1, Math.sqrt(fishData[i].captureProduction) / 50);
         ballInstance.entity = fishData[i].Entity;
         ballInstance.col = "r";
-        if (fishData[i].durchMesserKreisCapt < 500) {
-            constraint = Constraint.create({
-                pointA: { x: x1, y: y1 },
-                bodyB: ballInstance,
-                pointB: { x: 0, y: 0 },
-                stiffness: 0.0001,
-                damping: 0.1
-            });
-        } else {
-            constraint = Constraint.create({
-                pointA: { x: x1, y: y1 },
-                bodyB: ballInstance,
-                pointB: { x: -900, y: 0 - 100 },
-                stiffness: 0.001,
-                damping: 0.1
-            });
-        }
+        constraint = Constraint.create({
+            pointA: { x: x1, y: y1 },
+            bodyB: ballInstance,
+            pointB: { x: 0, y: 0 },
+            stiffness: 0.0001,
+            damping: 0.1
+        });
         World.add(engine.world, [ballInstance, constraint]);
         drawConstraint(constraint);
         BodyArray.push(ballInstance);
@@ -192,23 +181,15 @@ function matterAquaAbsolute() {
         ballInstance = Bodies.circle(x1, y1, Math.sqrt(fishData[i].aquacultureProduction) / 50);
         ballInstance.entity = fishData[i].Entity;
         ballInstance.col = "b";
-        if (fishData[i].durchMesserKreisCapt < 500) {
-            constraint = Constraint.create({
-                pointA: { x: x1, y: y1 },
-                bodyB: ballInstance,
-                pointB: { x: 0, y: 0 },
-                stiffness: 0.0001,
-                damping: 0.1
-            });
-        } else {
-            constraint = Constraint.create({
-                pointA: { x: x1, y: y1 },
-                bodyB: ballInstance,
-                pointB: { x: -900, y: 0 - 100 },
-                stiffness: 0.001,
-                damping: 0.1
-            });
-        }
+
+        constraint = Constraint.create({
+            pointA: { x: x1, y: y1 },
+            bodyB: ballInstance,
+            pointB: { x: 0, y: 0 },
+            stiffness: 0.0001,
+            damping: 0.1
+        });
+
         World.add(engine.world, [ballInstance, constraint]);
         drawConstraint(constraint);
         BodyArray.push(ballInstance);
