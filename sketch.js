@@ -69,7 +69,12 @@ function draw() {
     noStroke();
     fill(colR.r, colR.g, colR.b, 180);
     for (let i = 0; i < BodyArray.length; i++) {
-        fill(colR.r, colR.g, colR.b, 180);
+        if (BodyArray[i].col === "r") {
+            fill(colR.r, colR.g, colR.b, 180);
+        } else {
+            fill(colB.r, colB.g, colB.b, 180);
+        }
+
         drawBody(BodyArray[i]);
 
         if (dist(mouseX, mouseY, BodyArray[i].position.x, BodyArray[i].position.y) <= BodyArray[i].circleRadius) {
@@ -84,8 +89,6 @@ function draw() {
 
 function matterCapture() {
     for (let i = 0; i < fishData.length; i++) {
-
-
         let ballInstance;
         let x1 = round(fishData[i].longitude);
         let y1 = round(fishData[i].latitude);
@@ -93,6 +96,7 @@ function matterCapture() {
         y1 = map(y1, -90, 90, 900, 100);
         ballInstance = Bodies.circle(x1, y1, (fishData[i].durchMesserKreisCapt) / 7);
         ballInstance.entity = fishData[i].Entity;
+        ballInstance.col = "r";
         if (fishData[i].durchMesserKreisCapt < 500) {
             constraint = Constraint.create({
                 pointA: { x: x1, y: y1 },
@@ -113,7 +117,7 @@ function matterCapture() {
         World.add(engine.world, [ballInstance, constraint]);
         drawConstraint(constraint);
         BodyArray.push(ballInstance);
-        // drawBody(ballInstance);
+        //drawBody(ballInstance);
     }
 }
 
