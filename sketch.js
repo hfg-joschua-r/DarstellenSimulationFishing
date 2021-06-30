@@ -34,10 +34,14 @@ let constraint1;
 let canvas;
 
 let BodyArray = [];
+let button;
+let unit = "aquacultureProduction"
+
 
 function setup() {
     engine = Engine.create();
     createCanvas(1600, 1100);
+
     //showCapturePP();
     //showConsumptionPP();
     //showCaptureAbsolute();
@@ -45,19 +49,34 @@ function setup() {
     // run the engine
     engine.world.gravity.y = 0;
 
+
     Matter.Runner.run(engine);
-    //matterCapturePP();
+    matterCapturePP();
     //matterConsumptionPP();
     //matterAquaPP();
     //matterCaptureAbsolute();
-    matterAquaAbsolute();
+    //matterAquaAbsolute();
+
+    createButtonAqauPP();
+    createButtonAqauAbsolute();
+    createButtonConsumptionPP();
+    createButtonCapturePP();
+    createButtonCaptureAbsulte();
+
+
 }
+
 
 function draw() {
     //background(220);
+
     background(30);
     noStroke();
     fill(colR.r, colR.g, colR.b, 180);
+    textSize(24);
+    fill(0, 102, 153);
+
+
     for (let i = 0; i < BodyArray.length; i++) {
         if (BodyArray[i].col === "r") {
             fill(colR.r, colR.g, colR.b, 180);
@@ -72,13 +91,99 @@ function draw() {
         if (dist(mouseX, mouseY, BodyArray[i].position.x, BodyArray[i].position.y) <= BodyArray[i].circleRadius) {
             console.log(BodyArray[i].entity);
             fill(255);
-            text(BodyArray[i].entity, mouseX, mouseY);
+            //text(BodyArray[i].entity, mouseX, mouseY);
+            text((BodyArray[i].entity + ":  " + BodyArray[i].value + unit), 10, 30);
+
+
         }
 
     }
 
+
+
+}
+function createButtonAqauPP() {
+
+    button = createButton('AqauPP');
+    button.position(0, 150);
+    button.mousePressed(aqauPPButton);
+
+}
+function createButtonAqauAbsolute() {
+    button = createButton('AqauAbsolute');
+    button.position(0, 100);
+    button.mousePressed(aqauAbsoluteButton);
 }
 
+function createButtonConsumptionPP() {
+    button = createButton('ConsumtionPP');
+    button.position(0, 200);
+    button.mousePressed(consumptionPPButton);
+}
+function createButtonCaptureAbsulte() {
+    button = createButton('CaputureAbsulte');
+    button.position(0, 250);
+    button.mousePressed(captureAbsoluteButton);
+}
+function createButtonCapturePP() {
+    button = createButton('CaputrePP');
+    button.position(0, 300);
+    button.mousePressed(captureAbsoluteButton);
+}
+
+function capurePPButton() {
+    BodyArray = [];
+    World.clear(engine.world);
+    Engine.clear(engine);
+    matterCapturePP();;
+}
+function aqauPPButton() {
+    BodyArray = [];
+    World.clear(engine.world);
+    Engine.clear(engine);
+    matterAquaPP();;
+}
+
+function aqauAbsoluteButton() {
+    BodyArray = [];
+    unit = " tonnes"
+    World.clear(engine.world);
+    Engine.clear(engine);
+    matterAquaAbsolute();;
+}
+function captureAbsoluteButton() {
+    BodyArray = [];
+    World.clear(engine.world);
+    Engine.clear(engine);
+    matterCaptureAbsolute();;
+}
+function consumptionPPButton() {
+    BodyArray = [];
+    World.clear(engine.world);
+    Engine.clear(engine);
+    matterConsumptionPP();;
+}
+
+
+function change_bg() {
+    // Set dark color if box is checked
+    if (this.checked()) {
+        matterConsumptionPP();
+        console.log("checked");
+    }
+    // Set light color if box is unchecked
+    else {
+        clear()
+        //removeElements();
+        console.log("nicht gedrückt")
+        BodyArray = [];
+
+    }
+}
+
+function isChecked() {
+
+}
 function matterCapturePP() {
     for (let i = 0; i < fishData.length; i++) {
         let ballInstance;
@@ -181,6 +286,8 @@ function matterAquaAbsolute() {
         ballInstance = Bodies.circle(x1, y1, Math.sqrt(fishData[i].aquacultureProduction) / 50);
         ballInstance.entity = fishData[i].Entity;
         ballInstance.col = "b";
+        ballInstance.value = fishData[i].aquacultureProduction;
+
 
         constraint = Constraint.create({
             pointA: { x: x1, y: y1 },
