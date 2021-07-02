@@ -35,14 +35,15 @@ let canvas;
 
 let BodyArray = [];
 let button;
-let size = '22px';
-let unit = "aquacultureProduction";
-let colAquaPP = '#592831';
-let colback = '#0476D9';
+let size = '24px';
+let unit = "Aquaculture production";
+let colAquaPP = '#3B82C4';
+let colback = '#343146';
 let colAquaAb = '#BEC7C7';
 let colConPP = '#FFEB4D';
 let colCapAb = '#F2E1C2';
 let colCapPP = '#BF6854';
+let lightGrey = '#146A6F';
 
 function setup() {
     engine = Engine.create();
@@ -57,11 +58,11 @@ function setup() {
 
 
     Matter.Runner.run(engine);
-    matterCapturePP();
+    //matterCapturePP();
     //matterConsumptionPP();
     //matterAquaPP();
     //matterCaptureAbsolute();
-    //matterAquaAbsolute();
+    matterAquaAbsolute();
 
     createButtonAqauPP();
     createButtonAquaAbsolute();
@@ -82,19 +83,8 @@ function draw() {
     textSize(24);
     fill(0, 102, 153);
 
-
     for (let i = 0; i < BodyArray.length; i++) {
-        if (BodyArray[i].col === colAquaPP) {
-            fill(colAquaPP);
-        } else if (BodyArray[i].col === colAquaAb) {
-            fill(colAquaAb);
-        } else if (BodyArray[i].col === colConPP) {
-            fill(colConPP);
-        } else if (BodyArray[i].col === colCapAb) {
-            fill(colCapAb);
-        } else if (BodyArray[i].col === colCapPP) {
-            fill(colCapPP);
-        }
+        fill(BodyArray[i].col);
 
         drawBody(BodyArray[i]);
 
@@ -102,116 +92,140 @@ function draw() {
             console.log(BodyArray[i].entity);
             fill(255);
             //text(BodyArray[i].entity, mouseX, mouseY);
-            text((BodyArray[i].entity + ":  " + BodyArray[i].value + unit), 10, 30);
-
-
+            textAlign(CENTER);
+            text((BodyArray[i].entity + ":  " + BodyArray[i].value + unit), 800, 850);
         }
-
     }
-
-
-
+    //underline balken
+    switch (unit) {
+        case " kg anual aquaculture production per citizen": // +100 - 60 - 40 -40 -60
+            rect(1080, 1000, 70, 10);
+            break;
+        case " kg anual catch per citizen": //capture pp
+            rect(1365, 1000, 70, 10);
+            break;
+        case " metric tons (aquaculture)":
+            rect(185, 1000, 70, 10);
+            break;
+        case " metric tons (catch)":
+            rect(480, 1000, 70, 10);
+            break;
+        case " kg anual consumption per citizen":
+            rect(775, 1000, 70, 10);
+            break;
+    }
 }
+let aquaPPbuttonInst;
+let aquaAbsoButton;
+let consumptionButton;
+let captureAbsoButton;
+let captPPButton;
 
 function createButtonAqauPP() {
 
-    button = createButton('AquaPP');
-    button.position(300, 900);
-    button.mousePressed(aquaPPButton);
-    button.style('fontSize', size);
-    button.style('color', colAquaPP);
-    button.style('background-color', 'inherit')
-    button.style('margin', '20px')
-    button.style('border-style', 'none')
-    button.style('display', 'inline-block')
-
-
+    aquaPPbuttonInst = createButton('Aquaculture production per person');
+    aquaPPbuttonInst.position(970, 920);
+    aquaPPbuttonInst.mousePressed(aquaPPButton);
+    aquaPPbuttonInst.style('fontSize', size);
+    aquaPPbuttonInst.style('color', colAquaPP);
+    aquaPPbuttonInst.style('background-color', 'inherit')
+    aquaPPbuttonInst.style('margin', '20px')
+    aquaPPbuttonInst.style('width', '250px')
+    aquaPPbuttonInst.style('border-style', 'none')
+    aquaPPbuttonInst.style('display', 'inline-block')
 }
+
 function createButtonAquaAbsolute() {
-    button = createButton('AquaAbsolute');
-    button.position(0, 200);
-    button.mousePressed(aqauAbsoluteButton);
-    button.style('fontSize', size);
-    button.style('color', colAquaAb);
-    button.style('background-color', 'inherit')
-    button.style('margin', '20px')
-    button.style('border-style', 'none')
-    button.style('display', 'inline-block')
+    aquaAbsoButton = createButton('Aquaculture production');
+    aquaAbsoButton.position(75, 920);
+    aquaAbsoButton.mousePressed(aquaAbsoluteButton);
+    aquaAbsoButton.style('fontSize', size);
+    aquaAbsoButton.style('color', colAquaAb);
+    aquaAbsoButton.style('background-color', 'inherit')
+    aquaAbsoButton.style('margin', '20px')
+    aquaAbsoButton.style('width', '250px')
+    aquaAbsoButton.style('border-style', 'none')
+    aquaAbsoButton.style('display', 'inline-block')
 }
 
 function createButtonConsumptionPP() {
-    button = createButton('ConsumptionPP');
-    button.position(0, 300);
-    button.mousePressed(consumptionPPButton);
-    button.style('fontSize', size);
-    button.style('color', colConPP);
-    button.style('background-color', 'inherit')
-    button.style('margin', '20px')
-    button.style('border-style', 'none')
-    button.style('display', 'inline-block')
+    consumptionButton = createButton('Consumption per citizen');
+    consumptionButton.position(665, 920);
+    consumptionButton.mousePressed(consumptionPPButton);
+    consumptionButton.style('fontSize', size);
+    consumptionButton.style('color', colConPP);
+    consumptionButton.style('background-color', 'inherit')
+    consumptionButton.style('margin', '20px')
+    consumptionButton.style('width', '250px')
+    consumptionButton.style('border-style', 'none')
+    consumptionButton.style('display', 'inline-block')
 }
+
 function createButtonCaptureAbsulte() {
-    button = createButton('CaputureAbsolute');
-    button.position(0, 400);
-    button.mousePressed(captureAbsoluteButton);
-    button.style('fontSize', size);
-    button.style('color', colCapAb);
-    button.style('background-color', 'inherit')
-    button.style('margin', '20px')
-    button.style('border-style', 'none')
-    button.style('display', 'inline-block')
+    captureAbsoButton = createButton('Capture Production');
+    captureAbsoButton.position(370, 920);
+    captureAbsoButton.mousePressed(captureAbsoluteButton);
+    captureAbsoButton.style('fontSize', size);
+    captureAbsoButton.style('color', colCapAb);
+    captureAbsoButton.style('background-color', 'inherit')
+    captureAbsoButton.style('margin', '20px')
+    captureAbsoButton.style('width', '250px')
+    captureAbsoButton.style('border-style', 'none')
+    captureAbsoButton.style('display', 'inline-block')
 }
+
 function createButtonCapturePP() {
-    button = createButton('Capture PP');
-    button.position(0, 500);
-    button.mousePressed(capturePPButton);
-    button.style('fontSize', size);
-    button.style('color', colCapPP);
-    button.style('background-color', 'inherit')
-    button.style('margin', '20px')
-    button.style('border-style', 'none')
-    button.style('display', 'inline-block')
+    captPPButton = createButton('Capture production per person');
+    captPPButton.position(1255, 920);
+    captPPButton.mousePressed(capturePPButton);
+    captPPButton.style('fontSize', size);
+    captPPButton.style('color', colCapPP);
+    captPPButton.style('width', '250px')
+    captPPButton.style('background-color', 'inherit')
+    captPPButton.style('margin', '20px')
+    captPPButton.style('border-style', 'none')
+    captPPButton.style('display', 'inline-block')
 }
 
 function capturePPButton() {
     BodyArray = [];
-    unit = " kg"
+    unit = " kg anual catch per citizen"
     World.clear(engine.world);
     Engine.clear(engine);
     matterCapturePP();;
 }
+
 function aquaPPButton() {
     BodyArray = [];
-    unit = " kg"
+    unit = " kg anual aquaculture production per citizen"
     World.clear(engine.world);
     Engine.clear(engine);
     matterAquaPP();;
 }
 
-function aqauAbsoluteButton() {
+function aquaAbsoluteButton() {
     BodyArray = [];
-    unit = " metric tons"
+    unit = " metric tons (aquaculture)"
     World.clear(engine.world);
     Engine.clear(engine);
     matterAquaAbsolute();;
 }
+
 function captureAbsoluteButton() {
     BodyArray = [];
-    unit = " metric tons"
+    unit = " metric tons (catch)"
     World.clear(engine.world);
     Engine.clear(engine);
     matterCaptureAbsolute();;
 }
+
 function consumptionPPButton() {
     BodyArray = [];
-    unit = " kg"
+    unit = " kg anual consumption per citizen"
     World.clear(engine.world);
     Engine.clear(engine);
     matterConsumptionPP();;
 }
-
-
-
 
 function matterCapturePP() {
     for (let i = 0; i < fishData.length; i++) {

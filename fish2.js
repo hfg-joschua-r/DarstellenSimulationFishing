@@ -171,7 +171,7 @@ let fishData = [{
     "Code": "ARG2016",
     "Year": "2016",
     "population": "43508000",
-    "aquacultureProduction": "3673485",
+    "aquacultureProduction": "3673",
     "captureProduction": "755226",
     "catch p": {
         "P \nAquaculture": "84.4324032361864",
