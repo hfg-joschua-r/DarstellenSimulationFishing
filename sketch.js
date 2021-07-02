@@ -35,15 +35,15 @@ let canvas;
 
 let BodyArray = [];
 let button;
-let size = '24px';
+let size = '20px';
 let unit = "Aquaculture production";
 let colAquaPP = '#3B82C4';
 let colback = '#343146';
-let colAquaAb = '#BEC7C7';
-let colConPP = '#FFEB4D';
-let colCapAb = '#F2E1C2';
-let colCapPP = '#BF6854';
-let lightGrey = '#146A6F';
+let colAquaAb = '#00B4C9';
+let colConPP = '#FFBA65';
+let colCapAb = '#E88570';
+let colCapPP = '#386E93';
+let lightGrey = '#6F4968';
 
 function setup() {
     engine = Engine.create();
@@ -80,7 +80,6 @@ function draw() {
     background(colback);
     noStroke();
     fill(colR.r, colR.g, colR.b, 180);
-    textSize(24);
     fill(0, 102, 153);
 
     for (let i = 0; i < BodyArray.length; i++) {
@@ -93,6 +92,9 @@ function draw() {
             fill(255);
             //text(BodyArray[i].entity, mouseX, mouseY);
             textAlign(CENTER);
+            textFont('Helvetica');
+
+            textSize(24);
             text((BodyArray[i].entity + ":  " + BodyArray[i].value + unit), 800, 850);
         }
     }
