@@ -36,7 +36,7 @@ let canvas;
 let BodyArray = [];
 let button;
 let size = '20px';
-let unit = "Aquaculture production";
+let unit = " metric tons (aquaculture)";
 let colAquaPP = '#3B82C4';
 let colback = '#343146';
 let colAquaAb = '#00B4C9';
@@ -93,9 +93,9 @@ function draw() {
             //text(BodyArray[i].entity, mouseX, mouseY);
             textAlign(CENTER);
             textFont('Helvetica');
-
             textSize(24);
-            text((BodyArray[i].entity + ":  " + BodyArray[i].value + unit), 800, 850);
+            let value = new Intl.NumberFormat().format(Math.round(BodyArray[i].value));
+            text((BodyArray[i].entity + ":  " + value + unit), 800, 850);
         }
     }
     //underline balken
