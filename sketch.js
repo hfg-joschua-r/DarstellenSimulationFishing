@@ -45,9 +45,11 @@ let colCapAb = '#E88570';
 let colCapPP = '#386E93';
 let lightGrey = '#6F4968';
 
+let yOffset = 100;
+
 function setup() {
     engine = Engine.create();
-    createCanvas(1600, 1100);
+    createCanvas(1600, 940);
 
     //showCapturePP();
     //showConsumptionPP();
@@ -95,25 +97,25 @@ function draw() {
             textFont('Helvetica');
             textSize(24);
             let value = new Intl.NumberFormat().format(Math.round(BodyArray[i].value));
-            text((BodyArray[i].entity + ":  " + value + unit), 800, 850);
+            text((BodyArray[i].entity + ":  " + value + unit), 800, 850 - yOffset);
         }
     }
     //underline balken
     switch (unit) {
         case " kg anual aquaculture production per citizen": // +100 - 60 - 40 -40 -60
-            rect(1080, 1000, 70, 10);
+            rect(1080, 1000 - yOffset, 70, 10);
             break;
         case " kg anual catch per citizen": //capture pp
-            rect(1365, 1000, 70, 10);
+            rect(1365, 1000 - yOffset, 70, 10);
             break;
         case " metric tons (aquaculture)":
-            rect(185, 1000, 70, 10);
+            rect(185, 1000 - yOffset, 70, 10);
             break;
         case " metric tons (catch)":
-            rect(480, 1000, 70, 10);
+            rect(480, 1000 - yOffset, 70, 10);
             break;
         case " kg anual consumption per citizen":
-            rect(775, 1000, 70, 10);
+            rect(775, 1000 - yOffset, 70, 10);
             break;
     }
 }
@@ -125,8 +127,8 @@ let captPPButton;
 
 function createButtonAqauPP() {
 
-    aquaPPbuttonInst = createButton('Aquaculture production per person');
-    aquaPPbuttonInst.position(970, 920);
+    aquaPPbuttonInst = createButton('Aquaculture production per citizen');
+    aquaPPbuttonInst.position(970, 920 - yOffset);
     aquaPPbuttonInst.mousePressed(aquaPPButton);
     aquaPPbuttonInst.style('fontSize', size);
     aquaPPbuttonInst.style('color', colAquaPP);
@@ -139,7 +141,7 @@ function createButtonAqauPP() {
 
 function createButtonAquaAbsolute() {
     aquaAbsoButton = createButton('Aquaculture production');
-    aquaAbsoButton.position(75, 920);
+    aquaAbsoButton.position(75, 920 - yOffset);
     aquaAbsoButton.mousePressed(aquaAbsoluteButton);
     aquaAbsoButton.style('fontSize', size);
     aquaAbsoButton.style('color', colAquaAb);
@@ -152,7 +154,7 @@ function createButtonAquaAbsolute() {
 
 function createButtonConsumptionPP() {
     consumptionButton = createButton('Consumption per citizen');
-    consumptionButton.position(665, 920);
+    consumptionButton.position(665, 920 - yOffset);
     consumptionButton.mousePressed(consumptionPPButton);
     consumptionButton.style('fontSize', size);
     consumptionButton.style('color', colConPP);
@@ -165,7 +167,7 @@ function createButtonConsumptionPP() {
 
 function createButtonCaptureAbsulte() {
     captureAbsoButton = createButton('Capture Production');
-    captureAbsoButton.position(370, 920);
+    captureAbsoButton.position(370, 920 - yOffset);
     captureAbsoButton.mousePressed(captureAbsoluteButton);
     captureAbsoButton.style('fontSize', size);
     captureAbsoButton.style('color', colCapAb);
@@ -177,8 +179,8 @@ function createButtonCaptureAbsulte() {
 }
 
 function createButtonCapturePP() {
-    captPPButton = createButton('Capture production per person');
-    captPPButton.position(1255, 920);
+    captPPButton = createButton('Capture production per citizen');
+    captPPButton.position(1255, 920 - yOffset);
     captPPButton.mousePressed(capturePPButton);
     captPPButton.style('fontSize', size);
     captPPButton.style('color', colCapPP);
