@@ -167,7 +167,7 @@ function createButtonConsumptionPP() {
 }
 
 function createButtonCaptureAbsulte() {
-    captureAbsoButton = createButton("Capture Production");
+    captureAbsoButton = createButton("Wildcatch Production");
     captureAbsoButton.position(370, 920 - yOffset);
     captureAbsoButton.mousePressed(captureAbsoluteButton);
     captureAbsoButton.style("fontSize", size);
@@ -180,7 +180,7 @@ function createButtonCaptureAbsulte() {
 }
 
 function createButtonCapturePP() {
-    captPPButton = createButton("Capture production per citizen");
+    captPPButton = createButton("Wildcatch per citizen");
     captPPButton.position(1255, 920 - yOffset);
     captPPButton.mousePressed(capturePPButton);
     captPPButton.style("fontSize", size);
@@ -247,8 +247,9 @@ function matterCapturePP() {
         ballInstance.entity = fishData[i].Entity; //Save the country name in the .entity prop
         ballInstance.col = colCapPP; //set the Color for the circle
         let calculator = fishData[i].durchMesserKreisCapt;
-        ballInstance.value = (calculator * calculator) / 100;
+        ballInstance.value = (calculator * calculator) / 100; //calculate the diameter back to Kilogram value
         if (fishData[i].durchMesserKreisCapt < 500) {
+            //create constraint which hangs up the circle at the calculated position
             constraint = Constraint.create({
                 pointA: { x: x1, y: y1 },
                 bodyB: ballInstance,
@@ -265,9 +266,9 @@ function matterCapturePP() {
                 damping: 0.1,
             });
         }
-        World.add(engine.world, [ballInstance, constraint]);
+        World.add(engine.world, [ballInstance, constraint]); //add the circle and constraint to the matter.js Word
         drawConstraint(constraint);
-        BodyArray.push(ballInstance);
+        BodyArray.push(ballInstance); //Push the body to the body array to it can be drawn on each execution of draw()
         //drawBody(ballInstance);
     }
 }

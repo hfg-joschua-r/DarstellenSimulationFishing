@@ -4455,7 +4455,7 @@ let fishData = [{
     "Code": "SGP2016",
     "Year": "2016",
     "population": "5654000",
-    "aquacultureProduction": "6112361",
+    "aquacultureProduction": "6112.361",
     "captureProduction": "1234",
     "catch p": {
         "P \nAquaculture": "1081.06844711709",
@@ -5148,7 +5148,7 @@ let fishData = [{
     "Code": "TUV2016",
     "Year": "2016",
     "population": "11000",
-    "aquacultureProduction": "44318",
+    "aquacultureProduction": "2.5",
     "captureProduction": "7684",
     "catch p": {
         "P \nAquaculture": "4028.90909090909",

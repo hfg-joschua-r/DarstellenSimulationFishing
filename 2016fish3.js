@@ -2733,13 +2733,13 @@ let fishData = [{
     "Code": "LVA2016",
     "Year": "2016",
     "population": "1974000",
-    "aquacultureProduction": "788077",
+    "aquacultureProduction": "788.07",
     "captureProduction": "114806",
     "catch p": {
-        "P \nAquaculture": "399.228470111449",
+        "P \nAquaculture": "0.4",
         "p\n capture": "58.1590678824721"
     },
-    "durchMesserKreisAqua": "199.807024428935",
+    "durchMesserKreisAqua": "6.3",
     "durchMesserKreisCapt": "76.2620927345114",
     "fishConsumptionPP": "24.57",
     "field13": "",
@@ -4455,13 +4455,13 @@ let fishData = [{
     "Code": "SGP2016",
     "Year": "2016",
     "population": "5654000",
-    "aquacultureProduction": "6112361",
+    "aquacultureProduction": "6112.361",
     "captureProduction": "1234",
     "catch p": {
-        "P \nAquaculture": "1081.06844711709",
-        "p\n capture": "0.218252564556066"
+        "P \nAquaculture": "1.806844711709",
+        "p\n capture": "0.228252564556066"
     },
-    "durchMesserKreisAqua": "328.796053370031",
+    "durchMesserKreisAqua": "10.397",
     "durchMesserKreisCapt": "4.67175089828285",
     "fishConsumptionPP": "#N/A",
     "field13": "",
@@ -5148,13 +5148,13 @@ let fishData = [{
     "Code": "TUV2016",
     "Year": "2016",
     "population": "11000",
-    "aquacultureProduction": "44318",
+    "aquacultureProduction": "2.5",
     "captureProduction": "7684",
     "catch p": {
-        "P \nAquaculture": "4028.90909090909",
+        "P \nAquaculture": "0.23",
         "p\n capture": "698.545454545455"
     },
-    "durchMesserKreisAqua": "634.7368817793",
+    "durchMesserKreisAqua": "4.76",
     "durchMesserKreisCapt": "264.300104908313",
     "fishConsumptionPP": "#N/A",
     "field13": "",
