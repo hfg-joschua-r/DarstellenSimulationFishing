@@ -1,0 +1,25 @@
+Nachdem wir uns dazu entschlossen haben, unsere Darstellung mit p5.js umzusetzen fingen wir uns an näher mit dem Thema zu beschäftigen.
+Unsere initiale Idee bestand darin, die Kreise in p5.js zu generieren und dann als SVG zu exportieren, um das dann in Figma zu stylen.
+dafür begannen wir unsere Excel Daten als JSON zu konvertieren um diese im Code abrufen zu können. Daraufhin loopten wir mittels einer for-schleife 
+durch unsere JSON-Daten und nahmen für jeden Eintrag folgende Operationen vor: 
+    -Die Longitude und Latitude Werte werden auf unseren Canvas gemappt um so die position des Kreises zu setzen
+    -Mit dem p5.js Operator circle() werden unsere Kreise mit der entsprechenden Position und der Wurzel aus dem anzugebenden Wert gezoge.
+    -In einer anderen Variante platzierten wir noch den Ländernamen an der selbigen Position als Textelement
+
+Diese Darstellungsform exportierten wir als SVG und versuchten dieses in Figma entsprechend zu manipulieren. Nach längerem Überlegen und Diskutieren 
+kamen wir auf den Konsens dass die Möglichkeit in p5.js schnell zu iterieren ein größerer Vorteil ist als die genaueren Design & Animation Möglichkeiten
+in Figma. Fortan wollten wir also das Projekt ausschlieülich in p5.js umsetzen. 
+Nun suchten wir nach einer Möglichkeit unser original Konzept zu verfolgen, in welchem die einzelnen Länderkreise sich abstoßen und nicht überlappen. 
+Dank Inspiratiopn stießen wir auf die matter.js Physik Bibiliothek. Mit dieser hatten wir die Möglichkeit einen in einem simulierten physischen Raum 
+unsere Kreise als Bälle darzustellen, welche sich gegenseitig abstoßen und von Faktoren abhängig sind wie beispielsweise Anziehungskraft.
+
+Unsere Darstellung ging wie zuvor mittels der For-Schleife durch unseren Datensatz und die Position wurde gemappt. Nun wurde aber der Kreis bzw. Bälle 
+anders generiert. Über die matter.js Funktion Bodies.circle() wird nach wie vor unser Objekt an der zugehörigen Position generiert. Zusätzlich wird 
+bei matter.js jedoch noch ein constraint. Dieser bestimmt an welcher Position im Raum der Ball "aufgehängt wird". Die Anziehungskraft gen Boden
+deaktivierten wir. dieser Aufhängungspunkt ist dafür Wichtig, dass die Bälle sich zwar abstoßen aber nicht völlig frei durch den Raumfliegen sondern 
+sich immernoch getreu ihrer Position aufhalten.
+
+Nach Anpassung einiger Details und Kleinigkeiten verhielt sich unsere Darstellung ruhig und ausgegelichen. Wir setzten unsere 5 verschiedenen Varianten 
+um und schrieben eigene Funktion für jede einzelne Variante. Nun galt es noch eine Navigation/Benutzeroberfläche zu Gestalten, mit der der Nutzer 
+die verschiedenen Varianten ansehen und umschalten kann. Dies lösten wir mit Buttons, welche wir noch mithilfe von CSS properties an unser
+Gestaltungsbild anpassten. 
