@@ -14,6 +14,7 @@ var colMix = {
     b: 100,
 };
 
+//Load matter js operators
 const Engine = Matter.Engine;
 const Render = Matter.Render;
 const World = Matter.World;
@@ -33,10 +34,12 @@ let constraint1;
 
 let canvas;
 
+//initiate bodyArray
 let BodyArray = [];
 let button;
 let size = "20px";
 let unit = " metric tons (aquaculture)";
+//define our colors
 let colAquaPP = "#3B82C4";
 let colback = "#343146";
 let colAquaAb = "#00B4C9";
@@ -45,27 +48,33 @@ let colCapAb = "#E88570";
 let colCapPP = "#386E93";
 let lightGrey = "#6F4968";
 
+//define offsets for our content
 let yOffset = 100;
 let xOffset = 150;
 
 function setup() {
+    //initiate matter.js engine
     engine = Engine.create();
     createCanvas(1700, 940);
 
+    //Functions for old variant with overlapping circles
     //showCapturePP();
     //showConsumptionPP();
     //showCaptureAbsolute();
 
-    // run the engine
+    //set our matter.js Gravity to 0
     engine.world.gravity.y = 0;
-
+    // run the engine
     Matter.Runner.run(engine);
+
+    //Matter.js functions 
     //matterCapturePP();
     //matterConsumptionPP();
     //matterAquaPP();
     //matterCaptureAbsolute();
     matterAquaAbsolute();
 
+    //Create Buttons for our UI 
     createButtonAqauPP();
     createButtonAquaAbsolute();
     createButtonConsumptionPP();
@@ -74,35 +83,34 @@ function setup() {
 }
 
 function draw() {
-    //background(220);
-
+    //set the background color 
     background(colback);
     noStroke();
-    fill(colR.r, colR.g, colR.b, 180);
-    fill(0, 102, 153);
 
+    //For each body in our BodyArray ==> draw it
     for (let i = 0; i < BodyArray.length; i++) {
+        //set the according fill Color
         fill(BodyArray[i].col);
-
         drawBody(BodyArray[i]);
 
+        //Check for mouse Hovers over each Body
         if (
             dist(mouseX, mouseY, BodyArray[i].position.x, BodyArray[i].position.y) <=
             BodyArray[i].circleRadius
         ) {
-            console.log(BodyArray[i].entity);
+            //show country name + value in text
             fill(255);
-            //text(BodyArray[i].entity, mouseX, mouseY);
             textAlign(CENTER);
             textFont("Helvetica");
             textSize(24);
+            //Format the value to be seperated by points. For readability
             let value = new Intl.NumberFormat().format(
                 Math.round(BodyArray[i].value)
             );
             text(BodyArray[i].entity + ":  " + value + unit, 800, 850 - yOffset);
         }
     }
-    //underline balken
+    //underline bar under chosen topic
     switch (unit) {
         case " kg anual aquaculture production per citizen": // +100 - 60 - 40 -40 -60
             rect(1080, 1000 - yOffset, 70, 10);
@@ -121,6 +129,7 @@ function draw() {
             break;
     }
 }
+//Initiate our button instances
 let aquaPPbuttonInst;
 let aquaAbsoButton;
 let consumptionButton;
@@ -191,7 +200,7 @@ function createButtonCapturePP() {
     captPPButton.style("border-style", "none");
     captPPButton.style("display", "inline-block");
 }
-
+//Function for button clicks and switches
 function capturePPButton() {
     BodyArray = [];
     unit = " kg anual catch per citizen";
@@ -390,7 +399,10 @@ function matterConsumptionPP() {
         }
     }
 }
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////// OBSOLETE FUNCTIONS ///////////////////////////////////////////////////////////////////////////////////
 
+//Old functions without matter.js
 function showCapturePP() {
     noStroke();
     for (let i = 0; i < fishData.length; i++) {
