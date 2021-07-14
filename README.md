@@ -1,4 +1,4 @@
-# Darstellen Simulation | Fisch- fang & konsum.
+# Darstellen Simulation | Fisch -fang & -konsum.
 
 
 ## Installation 
